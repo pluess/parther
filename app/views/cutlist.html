@@ -1,0 +1,27 @@
+<div ng-controller="CutlistCtrl">
+    <table>
+        <tr>
+            <th></th>
+            <th>Length</th>
+            <th>Width</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="part in parts">
+            <td>{{$index+1}}</td>
+            <td>{{part.length}}</td>
+            <td>{{part.width}}</td>
+            <td><button ng-click="removePart($index)">X</button></td>
+        </tr>
+    </table>
+    <label>Length
+        <input type="number" ng-model="length"/>
+    </label>
+    <label>Width
+        <input type="number" ng-model="width"/>
+    </label>
+    <button ng-click="addPart(length, width)">Add</button>
+
+    <hr/>
+
+    <pre>{{cutlist | json }}</pre>
+</div>
