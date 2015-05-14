@@ -8,7 +8,7 @@
  * Controller of the partherApp
  */
 angular.module('partherApp')
-  .controller('CutlistCtrl', function ($scope) {
+  .controller('CutlistCtrl', ['$scope', 'cutlistView', function ($scope, cutlistView) {
     $scope.parts = [
       {length: 10, width: 20},
       {length: 30, width: 40},
@@ -41,8 +41,10 @@ angular.module('partherApp')
         x += part.width;
         $scope.cutlist.push(item);
       });
+      cutlistView.updateView($scope.cutlist);
     };
 
     $scope.generateCutList();
 
-  });
+  }]);
+
