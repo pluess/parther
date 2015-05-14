@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="cutlist.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="cutlist.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/controllers/cutlist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="12" selection-start="459" selection-end="459" vertical-scroll-proportion="0.33707866" vertical-offset="0" max-vertical-offset="801">
+            <state line="18" column="12" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
               <folding />
             </state>
           </provider>
@@ -35,7 +35,16 @@
       <file leaf-file-name="cutlistView.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/services/cutlistView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="65" selection-start="814" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+            <state line="33" column="34" selection-start="932" selection-end="932" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cutlist.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/services/cutlist.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="24" selection-start="203" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
               <folding />
             </state>
           </provider>
@@ -50,10 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cutlist.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="cutlist.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/cutlist.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="43" selection-start="616" selection-end="616" vertical-scroll-proportion="-13.125" vertical-offset="0" max-vertical-offset="555">
+            <state line="27" column="0" selection-start="769" selection-end="769" vertical-scroll-proportion="0.5371353" vertical-offset="0" max-vertical-offset="754">
               <folding />
             </state>
           </provider>
@@ -119,9 +128,9 @@
         <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/test/karma.conf.js" />
         <option value="$PROJECT_DIR$/test/spec/controllers/cutlist.js" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/cutlist.js" />
         <option value="$PROJECT_DIR$/app/scripts/services/cutlistView.js" />
         <option value="$PROJECT_DIR$/app/views/cutlist.html" />
-        <option value="$PROJECT_DIR$/app/scripts/controllers/cutlist.js" />
       </list>
     </option>
   </component>
@@ -570,13 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/services/cutlist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="24" selection-start="203" selection-end="218" vertical-scroll-proportion="0.2247191" vertical-offset="0" max-vertical-offset="801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/spec/services/cutlist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="31" selection-start="594" selection-end="594" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
@@ -598,23 +600,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/cutlist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="12" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/services/cutlist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="24" selection-start="203" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/services/cutlistView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="65" selection-start="814" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+        <state line="33" column="34" selection-start="932" selection-end="932" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/cutlist.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="43" selection-start="616" selection-end="616" vertical-scroll-proportion="-13.125" vertical-offset="0" max-vertical-offset="555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/cutlist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="12" selection-start="459" selection-end="459" vertical-scroll-proportion="0.33707866" vertical-offset="0" max-vertical-offset="801">
+        <state line="27" column="0" selection-start="769" selection-end="769" vertical-scroll-proportion="0.5371353" vertical-offset="0" max-vertical-offset="754">
           <folding />
         </state>
       </provider>
