@@ -6,14 +6,19 @@ describe('Controller: CutlistCtrl', function () {
   beforeEach(module('partherApp'));
 
   var cutlistCtrl,
-    scope;
+    scope,
+    cutlistView,
+    cutlist;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
+    cutlistView = jasmine.createSpyObj('cutlistView', ['updateView']);
+    cutlist = jasmine.createSpyObj('cutlist', ['generateCutList']);
     scope = $rootScope.$new();
     cutlistCtrl = $controller('CutlistCtrl', {
-      $scope: scope
+      $scope: scope, cutlist:cutlist, cutlistView:cutlistView
     });
+    spyOn(scope, 'updateCutlist').and.callThrough();
   }));
 
   it('addPart should add a part to the cutlist', function () {
@@ -23,6 +28,7 @@ describe('Controller: CutlistCtrl', function () {
     expect(scope.parts.length).toBe(len+1);
     expect(scope.parts[len].length).toBe(100);
     expect(scope.parts[len].width).toBe(200);
+    expect(scope.updateCutlist.calls.count()).toEqual(1);
   });
 
   it('removePart should remove a part from the cutlist', function () {
@@ -30,13 +36,7 @@ describe('Controller: CutlistCtrl', function () {
     scope.removePart(2);
 
     expect(scope.parts.length).toBe(len-1);
+    expect(scope.updateCutlist.calls.count()).toEqual(1);
   });
 
-  it('generateCutList should align parts along the x axis', function() {
-    var x = 0;
-    angular.forEach(scope.cutlist, function(item) {
-      expect(x).toBe(item.x);
-      x += item.width;
-    });
-  });
 });

@@ -2,30 +2,30 @@
     <table>
         <tr>
             <th></th>
-            <th>Length</th>
             <th>Width</th>
+            <th>Height</th>
             <th></th>
         </tr>
         <tr ng-repeat="part in parts">
             <td>{{$index+1}}</td>
-            <td>{{part.length}}</td>
             <td>{{part.width}}</td>
+            <td>{{part.height}}</td>
             <td><button ng-click="removePart($index)">X</button></td>
         </tr>
     </table>
     <label>Length
-        <input type="number" ng-model="length"/>
-    </label>
-    <label>Width
         <input type="number" ng-model="width"/>
     </label>
-    <button ng-click="addPart(length, width)">Add</button>
+    <label>Width
+        <input type="number" ng-model="height"/>
+    </label>
+    <button ng-click="addPart(width, height)">Add</button>
 
     <hr/>
 
     <div id="pixi-area" />
 
     <pre>{{cutlist | json }}</pre>
-    
+
 </div>
 
