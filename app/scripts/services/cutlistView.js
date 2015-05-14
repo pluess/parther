@@ -11,20 +11,22 @@ angular.module('partherApp')
   .service('cutlistView', function () {
 
     var stage, renderer;
+    var pixiArea = $('#pixi-area');
 
-    (function () {
-      // init PIXI
+    this.updateSheet = function(sheet) {
+      pixiArea.empty();
       // create an new instance of a pixi stage
       stage = new PIXI.Stage(0x66FF99);
 
       // create a renderer instance.
-      renderer = PIXI.autoDetectRenderer(400, 300);
+      renderer = PIXI.autoDetectRenderer(sheet.x, sheet.y);
+      pixiArea.append(renderer.view);
+    };
 
-      $('#pixi-area').append(renderer.view);
-    }());
-
-    this.updateView = function (cutlist) {
-      stage.removeChildren();
+    this.updateParts = function (cutlist) {
+      if (stage) {
+        stage.removeChildren();
+      }
       angular.forEach(cutlist, function(item, count) {
         var graphics = new PIXI.Graphics();
         graphics.beginFill(0xFFFFFF);
@@ -39,5 +41,3 @@ angular.module('partherApp')
       renderer.render(stage);
     };
   });
-
-WW
