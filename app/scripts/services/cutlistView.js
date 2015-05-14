@@ -29,7 +29,7 @@ angular.module('partherApp')
         graphics = new PIXI.Graphics();
         graphics.beginFill(0xFFFFFF);
         graphics.lineStyle(1, 0xFF0000);
-        graphics.drawRect(item.x, item.y, item.width, item.length);
+        graphics.drawRect(item.x, item.y, item.width, item.height);
         stage.addChild(graphics);
       });
       renderer.render(stage);
