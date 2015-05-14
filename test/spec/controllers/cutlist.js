@@ -12,7 +12,7 @@ describe('Controller: CutlistCtrl', function () {
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
-    cutlistView = jasmine.createSpyObj('cutlistView', ['updateView']);
+    cutlistView = jasmine.createSpyObj('cutlistView', ['updateParts']);
     cutlist = jasmine.createSpyObj('cutlist', ['generateCutList']);
     scope = $rootScope.$new();
     cutlistCtrl = $controller('CutlistCtrl', {
@@ -26,8 +26,8 @@ describe('Controller: CutlistCtrl', function () {
     scope.addPart(100, 200);
 
     expect(scope.parts.length).toBe(len+1);
-    expect(scope.parts[len].length).toBe(100);
-    expect(scope.parts[len].width).toBe(200);
+    expect(scope.parts[len].width).toBe(100);
+    expect(scope.parts[len].height).toBe(200);
     expect(scope.updateCutlist.calls.count()).toEqual(1);
   });
 

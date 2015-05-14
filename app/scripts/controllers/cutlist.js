@@ -15,6 +15,11 @@ angular.module('partherApp')
       {width: 50, height: 60}
     ];
 
+    $scope.sheet = {
+      x: 2500,
+      y: 1200
+    };
+
     $scope.addPart = function (w, h) {
       if (!h || !w) {
         window.alert('Please enter length and width');
@@ -33,9 +38,16 @@ angular.module('partherApp')
 
     $scope.updateCutlist = function () {
       var list = cutlist.generateCutList($scope.parts);
-      cutlistView.updateView(list);
+      cutlistView.updateParts(list);
     };
 
+    $scope.updateSheet = function() {
+      cutlist.setSheet($scope.sheet);
+      cutlistView.updateSheet($scope.sheet);
+      $scope.updateCutlist();
+    };
+
+    $scope.updateSheet();
     $scope.updateCutlist();
 
   }]);

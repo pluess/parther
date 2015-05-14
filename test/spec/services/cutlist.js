@@ -25,4 +25,15 @@ describe('Service: cutlist', function () {
     expect(list[2].x).toBe(40);
   });
 
+  it('has an initial sheet', function() {
+    expect(cutlist.getSheet().x).toBe(2500);
+    expect(cutlist.getSheet().y).toBe(1200);
+  });
+
+  it('sets a new sheet correctly', function() {
+    cutlist.setSheet({x: 3000, y: 1000});
+    expect(cutlist.getSheet().x).toBe(3000);
+    expect(cutlist.getSheet().y).toBe(1000);
+  });
+
 });

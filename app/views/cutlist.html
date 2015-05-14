@@ -1,5 +1,15 @@
 <div ng-controller="CutlistCtrl">
-    <table class="table table-striped">
+    <h2>Sheet</h2>
+    <label>Width
+        <input type="number" ng-model="sheet.x" ng-change="updateSheet()"/>
+    </label>
+    <label>Height
+        <input type="number" ng-model="sheet.y" ng-change="updateSheet()"/>
+    </label>
+
+    <hr/>
+    <h2>Parts</h2>
+    <table class="table table-striped" >
         <tr>
             <th class="col-md-1">#</th>
             <th class="col-md-2">Width</th>
@@ -13,16 +23,16 @@
             <td><button ng-click="removePart($index)">X</button></td>
         </tr>
     </table>
-    <label>Length
+    <label>Width
         <input type="number" ng-model="width"/>
     </label>
-    <label>Width
+    <label>Height
         <input type="number" ng-model="height"/>
     </label>
     <button ng-click="addPart(width, height)">Add</button>
 
     <hr/>
-
+    <h2>Layout</h2>
     <div id="pixi-area" />
 
 </div>
