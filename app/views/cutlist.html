@@ -1,10 +1,10 @@
 <div ng-controller="CutlistCtrl">
-    <table>
+    <table class="table table-striped">
         <tr>
-            <th></th>
-            <th>Width</th>
-            <th>Height</th>
-            <th></th>
+            <th class="col-md-1">#</th>
+            <th class="col-md-2">Width</th>
+            <th class="col-md-2">Height</th>
+            <th class="col-md-1"></th>
         </tr>
         <tr ng-repeat="part in parts">
             <td>{{$index+1}}</td>
@@ -24,8 +24,6 @@
     <hr/>
 
     <div id="pixi-area" />
-
-    <pre>{{cutlist | json }}</pre>
 
 </div>
 

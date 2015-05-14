@@ -10,7 +10,7 @@
 angular.module('partherApp')
   .service('cutlistView', function () {
 
-    var stage, renderer, graphics;
+    var stage, renderer;
 
     (function () {
       // init PIXI
@@ -25,13 +25,19 @@ angular.module('partherApp')
 
     this.updateView = function (cutlist) {
       stage.removeChildren();
-      angular.forEach(cutlist, function(item) {
-        graphics = new PIXI.Graphics();
+      angular.forEach(cutlist, function(item, count) {
+        var graphics = new PIXI.Graphics();
         graphics.beginFill(0xFFFFFF);
         graphics.lineStyle(1, 0xFF0000);
         graphics.drawRect(item.x, item.y, item.width, item.height);
+        var text = new PIXI.Text(count+1, {font: '10px Arial', fill: 'green'});
+        text.position.x = item.x+5;
+        text.position.y = item.y;
+        graphics.addChild(text);
         stage.addChild(graphics);
       });
       renderer.render(stage);
     };
   });
+
+WW
