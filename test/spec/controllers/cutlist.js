@@ -12,8 +12,8 @@ describe('Controller: CutlistCtrl', function () {
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
-    cutlistView = jasmine.createSpyObj('cutlistView', ['updateParts']);
-    cutlist = jasmine.createSpyObj('cutlist', ['generateCutList']);
+    cutlistView = jasmine.createSpyObj('cutlistView', ['updateParts', 'updateSheet']);
+    cutlist = jasmine.createSpyObj('cutlist', ['generateCutList', 'setSheet']);
     scope = $rootScope.$new();
     cutlistCtrl = $controller('CutlistCtrl', {
       $scope: scope, cutlist:cutlist, cutlistView:cutlistView
