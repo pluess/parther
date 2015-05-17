@@ -1,3 +1,5 @@
+/* jshint jasmine: true */
+
 'use strict';
 
 describe('Service: cutlist', function () {

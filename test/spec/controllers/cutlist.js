@@ -1,3 +1,5 @@
+/* jshint jasmine: true */
+
 'use strict';
 
 describe('Controller: CutlistCtrl', function () {
@@ -7,36 +9,35 @@ describe('Controller: CutlistCtrl', function () {
 
   var cutlistCtrl,
     scope,
+    log,
     cutlistView,
-    cutlist;
+    cutlist2;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, _$log_) {
     cutlistView = jasmine.createSpyObj('cutlistView', ['updateParts', 'updateSheet']);
-    cutlist = jasmine.createSpyObj('cutlist', ['generateCutList', 'setSheet']);
+    cutlist2 = jasmine.createSpyObj('cutlist2', ['evaluateCutlist']);
     scope = $rootScope.$new();
+    log = _$log_;
     cutlistCtrl = $controller('CutlistCtrl', {
-      $scope: scope, cutlist:cutlist, cutlistView:cutlistView
+      $scope: scope, $log:log, cutlist2:cutlist2, cutlistView:cutlistView
     });
-    spyOn(scope, 'updateCutlist').and.callThrough();
   }));
 
-  it('addPart should add a part to the cutlist', function () {
+  it('addPart should add a part to the cutlist2', function () {
     var len = scope.parts.length;
     scope.addPart(100, 200);
 
     expect(scope.parts.length).toBe(len+1);
     expect(scope.parts[len].width).toBe(100);
     expect(scope.parts[len].height).toBe(200);
-    expect(scope.updateCutlist.calls.count()).toEqual(1);
   });
 
-  it('removePart should remove a part from the cutlist', function () {
+  it('removePart should remove a part from the cutlist2', function () {
     var len = scope.parts.length;
     scope.removePart(2);
 
     expect(scope.parts.length).toBe(len-1);
-    expect(scope.updateCutlist.calls.count()).toEqual(1);
-  });
+   });
 
 });
