@@ -20,6 +20,8 @@ angular.module('partherApp')
       y: 300
     };
 
+    $scope.cutlist = [];
+
     $scope.addPart = function (w, h, n) {
       if (!h || !w) {
         window.alert('Please enter length and width');
@@ -38,8 +40,8 @@ angular.module('partherApp')
     };
 
     $scope.updateCutlist = function () {
-      var list = cutlist2.evaluateCutlist($scope.parts, $scope.sheet);
-      cutlistView.updateParts(list);
+      $scope.cutlist = cutlist2.evaluateCutlist($scope.parts, $scope.sheet);
+      cutlistView.updateParts($scope.cutlist);
     };
 
     $scope.updateSheet = function() {

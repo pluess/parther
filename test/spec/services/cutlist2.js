@@ -10,32 +10,11 @@ describe('Service: cutlist2', function () {
   beforeEach(module('partherApp'));
 
   // instantiate service
-  var cutlist2,
-    parts,
-    sheet;
+  var cutlist2;
 
   beforeEach(inject(function (_cutlist2_) {
     cutlist2 = _cutlist2_;
   }));
-
-  xit('aligns parts horiotontally', function () {
-    parts = [
-      {width: 10, height: 20},
-      {width: 30, height: 40},
-      {width: 50, height: 60}
-    ];
-    sheet = {
-      x: 500,
-      y: 500
-    };
-
-    var sheets = cutlist2.evaluateCutlis(parts, sheet, 2);
-    expect(sheets).toEqual(jasmine.any(Array));
-    expect(sheets.length).toBe(3);
-    expect(sheets[2].xorigin).toBe(40);
-    expect(sheets[2].usedBy.x).toBe(parts[2].width);
-    expect(sheets[2].usedBy.y).toBe(parts[2].height);
-  });
 
   describe('Sheet', function () {
     it('calculates area', function () {
@@ -87,6 +66,26 @@ describe('Service: cutlist2', function () {
       expect(cutlist2.findMatchingSheetIndex(sheets, new cutlist2.Part(1001, 1, 'a Name'))).toBe(-1);
     });
 
+    it('in first sheet which is bigger or equal to part', function() {
+      var partA = new cutlist2.Part(10, 20, 'Part A');
+      var partB = new cutlist2.Part(30, 40, 'Part A');
+      var sheets = [
+        new cutlist2.Sheet(0,0, 10,20),
+        new cutlist2.Sheet(10,0, 390, 20),
+        new cutlist2.Sheet(0,20, 30, 40),
+        new cutlist2.Sheet(20, 30, 370, 40),
+        new cutlist2.Sheet(0, 60, 400, 240)
+      ];
+      sheets[0].usedBy = partA;
+      sheets[2].usedBy = partB;
+
+      var part = new cutlist2.Part(5, 5, 'new Part');
+
+      var index = cutlist2.findMatchingSheetIndex(sheets, part);
+
+      expect(index).toBe(1);
+    });
+
   });
 
   describe('place part', function () {
@@ -97,6 +96,16 @@ describe('Service: cutlist2', function () {
         area += s.area();
       });
       return area;
+    };
+
+    var findPartinSheets = function(sheets, part) {
+      var foundSheet = null;
+      angular.forEach(sheets, function (s) {
+        if (!foundSheet && s.usedBy===part) {
+          foundSheet = s;
+        }
+      });
+      return foundSheet;
     };
 
     it('in identical sheet', function () {
@@ -125,14 +134,15 @@ describe('Service: cutlist2', function () {
       var part = new cutlist2.Part(25, 25, 'a Name');
       var expectedArea = totalArea(sheets);
 
-      expect(part.placedIn).toBeNull();
       var result = cutlist2.placePart(sheets, part, 0);
+      var placedSheet = findPartinSheets(result, part);
+
       expect(result.length).toBe(sheets.length + 1);
-      expect(part.placedIn).not.toBeNull();
-      expect(part.placedIn.x).toBe(part.x);
-      expect(part.placedIn.y).toBe(part.y);
-      expect(part.placedIn.xorigin).toBe(0);
-      expect(part.placedIn.yorigin).toBe(0);
+      expect(placedSheet).not.toBeNull();
+      expect(placedSheet.x).toBe(part.x);
+      expect(placedSheet.y).toBe(part.y);
+      expect(placedSheet.xorigin).toBe(0);
+      expect(placedSheet.yorigin).toBe(0);
       expect(result[2].xorigin).toBe(25);
       expect(result[2].yorigin).toBe(0);
 
@@ -140,7 +150,7 @@ describe('Service: cutlist2', function () {
 
     });
 
-    it('smaller than sheet (x axis)', function () {
+    it('smaller than sheet (y axis)', function () {
 
       var sheets = [
         new cutlist2.Sheet(0, 0, 25, 100),
@@ -149,14 +159,15 @@ describe('Service: cutlist2', function () {
       var part = new cutlist2.Part(25, 25, 'a Name');
       var expectedArea = totalArea(sheets);
 
-      expect(part.placedIn).toBeNull();
       var result = cutlist2.placePart(sheets, part, 0);
+      var placedSheet = findPartinSheets(result, part);
+
       expect(result.length).toBe(sheets.length + 1);
-      expect(part.placedIn).not.toBeNull();
-      expect(part.placedIn.x).toBe(part.x);
-      expect(part.placedIn.y).toBe(part.y);
-      expect(part.placedIn.xorigin).toBe(0);
-      expect(part.placedIn.yorigin).toBe(0);
+      expect(placedSheet).not.toBeNull();
+      expect(placedSheet.x).toBe(part.x);
+      expect(placedSheet.y).toBe(part.y);
+      expect(placedSheet.xorigin).toBe(0);
+      expect(placedSheet.yorigin).toBe(0);
       expect(result[2].xorigin).toBe(0);
       expect(result[2].yorigin).toBe(25);
 
@@ -173,14 +184,15 @@ describe('Service: cutlist2', function () {
       var part = new cutlist2.Part(25, 25, 'a Name');
       var expectedArea = totalArea(sheets);
 
-      expect(part.placedIn).toBeNull();
       var result = cutlist2.placePart(sheets, part, 0);
+      var placedSheet = findPartinSheets(result, part);
+
       expect(result.length).toBe(sheets.length + 2);
-      expect(part.placedIn).not.toBeNull();
-      expect(part.placedIn.x).toBe(part.x);
-      expect(part.placedIn.y).toBe(part.y);
-      expect(part.placedIn.xorigin).toBe(0);
-      expect(part.placedIn.yorigin).toBe(0);
+      expect(placedSheet).not.toBeNull();
+      expect(placedSheet.x).toBe(part.x);
+      expect(placedSheet.y).toBe(part.y);
+      expect(placedSheet.xorigin).toBe(0);
+      expect(placedSheet.yorigin).toBe(0);
       expect(result[2].xorigin).toBe(25);
       expect(result[2].yorigin).toBe(0);
       expect(result[3].xorigin).toBe(0);
