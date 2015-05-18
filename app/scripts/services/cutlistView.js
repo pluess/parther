@@ -27,15 +27,22 @@ angular.module('partherApp')
       if (stage) {
         stage.removeChildren();
       }
-      angular.forEach(cutlist, function(item, count) {
+      angular.forEach(cutlist, function(item) {
         var graphics = new PIXI.Graphics();
-        graphics.beginFill(0xFFFFFF);
-        graphics.lineStyle(1, 0xFF0000);
+        if (item.usedBy!==null) {
+          graphics.beginFill(0x99CCFF);
+        }
+        else {
+          graphics.beginFill(0xFF9999);
+        }
+        graphics.lineStyle(1, 'black');
         graphics.drawRect(item.xorigin, item.yorigin, item.x, item.y);
-        var text = new PIXI.Text(count+1, {font: '10px Arial', fill: 'green'});
-        text.position.x = item.xorigin+5;
-        text.position.y = item.yorigin;
-        graphics.addChild(text);
+        if (item.usedBy!==null) {
+          var text = new PIXI.Text(item.usedBy.name, {font: '14px Arial', fill: 'green'});
+          text.position.x = item.xorigin+5;
+          text.position.y = item.yorigin;
+          graphics.addChild(text);
+        }
         stage.addChild(graphics);
         renderer.render(stage);
       });
