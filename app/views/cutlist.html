@@ -11,25 +11,28 @@
     <h2>Parts</h2>
     <table class="table table-striped" >
         <tr>
-            <th class="col-md-1">#</th>
+            <th class="col-md-1">Name</th>
             <th class="col-md-2">Width</th>
             <th class="col-md-2">Height</th>
             <th class="col-md-1"></th>
         </tr>
         <tr ng-repeat="part in parts">
-            <td>{{$index+1}}</td>
+            <td>{{part.name}}</td>
             <td>{{part.width}}</td>
             <td>{{part.height}}</td>
             <td><button ng-click="removePart($index)">X</button></td>
         </tr>
     </table>
+    <label>Name
+        <input type="text" ng-model="name"/>
+    </label>
     <label>Width
         <input type="number" ng-model="width"/>
     </label>
     <label>Height
         <input type="number" ng-model="height"/>
     </label>
-    <button ng-click="addPart(width, height)">Add</button>
+    <button ng-click="addPart(width, height, name)">Add</button>
 
     <hr/>
     <h2>Layout</h2>

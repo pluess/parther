@@ -25,7 +25,8 @@ angular.module('partherApp')
       return this.x * this.y;
     };
 
-    this.Part = function (x, y) {
+    this.Part = function (x, y, name) {
+      this.name = name;
       this.x = x;
       this.y = y;
       this.placedIn = null; // set to Sheet
@@ -39,7 +40,7 @@ angular.module('partherApp')
       var parts = [];
       var that = this;
       angular.forEach(inParts, function (inPart) {
-        parts.push(new that.Part(inPart.width, inPart.height));
+        parts.push(new that.Part(inPart.width, inPart.height, inPart.name));
       });
 
       var sheets = [];
