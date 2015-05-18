@@ -42,36 +42,68 @@ angular.module('partherApp')
         parts.push(new that.Part(inPart.width, inPart.height, inPart.name));
       });
 
-      var sheets = [];
-      var sheet = new this.Sheet(0, 0, inSheet.x, inSheet.y);
-      sheets.push(sheet);
+      var sheetss = this.findAllPossibleCombinations(parts, [[new this.Sheet(0, 0, inSheet.x, inSheet.y)]]);
 
-      for (var i = 0; i < parts.length; i++) {
-        var index = this.findMatchingSheetIndex(sheets, parts[i]);
-        if (index < 0) {
-          break;
+      var bestSheets = null;
+      var bestRating = -1.0;
+      angular.forEach(sheetss, function(sheets) {
+        var newRating = this.rateCombination(sheets);
+        if (newRating>bestRating) {
+          bestRating = newRating;
+          bestSheets = sheets;
         }
-        sheets = this.placePart(sheets, parts[i], index);
-      }
+      });
 
-      return sheets;
+      return bestSheets;
     };
 
-    this.findMatchingSheetIndex = function (sheets, part) {
-      $log.debug('findMatchingSheetIndex: sheets=');
-      $log.debug(sheets);
-      $log.debug('findMatchingSheetIndex: part=');
-      $log.debug(part);
+    this.rateCombination = function(sheets) {
+      if (sheets) {
+        return 1.0;
+      }
+      return 1.0;
+    };
 
-      for (var i = 0; i < sheets.length; i++) {
+    this.findAllPossibleCombinations = function(parts, sheetss) {
+      for (var i = 0; i < parts.length; i++) {
+        var nextSheetss = [];
+        for (var j=0; j < sheetss.length; j++) {
+          var indexes = this.findAllMatchingSheetIndexes(sheetss[j], parts[i]);
+          if (indexes.length===0) {
+            window.alert('no matching sheets found.');
+          }
+          for (var k=0; k<indexes.length; k++) {
+            nextSheetss.push(this.placePart(sheetss[j], parts[i], indexes[k]));
+          }
+        }
+        sheetss = nextSheetss;
+      }
+
+    };
+
+    this.findAllMatchingSheetIndexes = function (sheets, part) {
+      var indexes = [];
+      var i = 0;
+      do {
+        i = this.findMatchingSheetIndex(sheets, part, i+1);
+        if (i>0) {
+          indexes.push(i);
+        }
+        $log.debug(i);
+      } while (i>0);
+      return indexes;
+    };
+
+    this.findMatchingSheetIndex = function (sheets, part, startIndex) {
+      if (!startIndex) {
+        startIndex = 0;
+      }
+      for (var i = startIndex; i < sheets.length; i++) {
         var sheet = sheets[i];
         if (sheet.x >= part.x && sheet.y >= part.y && sheet.usedBy === null) {
-          $log.debug('findMatchingSheetIndex:'+i);
           return i;
         }
       }
-
-      $log.debug('findMatchingSheetIndex: -1');
       return -1;
     };
 
