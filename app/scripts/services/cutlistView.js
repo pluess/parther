@@ -27,7 +27,7 @@ angular.module('partherApp')
       if (stage) {
         stage.removeChildren();
       }
-      angular.forEach(cutlist, function(item) {
+      angular.forEach(cutlist, function(item, index) {
         var graphics = new PIXI.Graphics();
         if (item.usedBy!==null) {
           graphics.beginFill(0x99CCFF);
@@ -37,12 +37,16 @@ angular.module('partherApp')
         }
         graphics.lineStyle(1, 'black');
         graphics.drawRect(item.xorigin, item.yorigin, item.x, item.y);
+        var text;
         if (item.usedBy!==null) {
-          var text = new PIXI.Text(item.usedBy.name, {font: '14px Arial', fill: 'green'});
-          text.position.x = item.xorigin+5;
-          text.position.y = item.yorigin;
-          graphics.addChild(text);
+          text = new PIXI.Text(''+(index+1)+': '+item.usedBy.name, {font: '14px Arial', fill: 'green'});
         }
+        else {
+          text = new PIXI.Text(''+(index+1), {font: '14px Arial', fill: 'green'});
+        }
+        text.position.x = item.xorigin+5;
+        text.position.y = item.yorigin;
+        graphics.addChild(text);
         stage.addChild(graphics);
         renderer.render(stage);
       });

@@ -29,7 +29,6 @@ angular.module('partherApp')
       this.name = name;
       this.x = x;
       this.y = y;
-      this.placedIn = null; // set to Sheet
     };
 
     this.Part.prototype.area = function () {
@@ -63,6 +62,7 @@ angular.module('partherApp')
       $log.debug(sheets);
       $log.debug('findMatchingSheetIndex: part=');
       $log.debug(part);
+
       for (var i = 0; i < sheets.length; i++) {
         var sheet = sheets[i];
         if (sheet.x >= part.x && sheet.y >= part.y && sheet.usedBy === null) {
@@ -70,6 +70,7 @@ angular.module('partherApp')
           return i;
         }
       }
+
       $log.debug('findMatchingSheetIndex: -1');
       return -1;
     };
@@ -80,7 +81,6 @@ angular.module('partherApp')
       // part and sheet are identical
       if (s.x === part.x && s.y === part.y) {
         s.usedBy = part;
-        part.placedIn = s;
         return inSheets;
       }
 
@@ -94,7 +94,6 @@ angular.module('partherApp')
       // new sheet with part size
       var partSheet = new this.Sheet(s.xorigin, s.yorigin, part.x, part.y);
       partSheet.usedBy = part;
-      part.placedIn = partSheet;
       newSheets.push(partSheet);
 
       // new left over x necessary
