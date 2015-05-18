@@ -231,7 +231,7 @@ describe('Service: cutlist2', function () {
       var parts = [
         new cutlist2.Part(5, 5, 'A')
       ];
-      var resultss = cutlist2.findAllPossibleCombinations(parts, sheetss);
+      var resultss = cutlist2.findAllPossibleCombinationsForParts(parts, sheetss);
       expect(resultss.length).toBe(1);
       expect(resultss[0].length).toBe(3);
 
@@ -244,7 +244,7 @@ describe('Service: cutlist2', function () {
         new cutlist2.Part(5, 5, 'A'),
         new cutlist2.Part(5, 5, 'B')
       ];
-      var resultss = cutlist2.findAllPossibleCombinations(parts, sheetss);
+      var resultss = cutlist2.findAllPossibleCombinationsForParts(parts, sheetss);
       expect(resultss.length).toBe(2);
 
       angular.forEach(resultss, function(results) {
@@ -260,7 +260,7 @@ describe('Service: cutlist2', function () {
         new cutlist2.Part(5, 5, 'B'),
         new cutlist2.Part(5, 5, 'C')
       ];
-      var resultss = cutlist2.findAllPossibleCombinations(parts, sheetss);
+      var resultss = cutlist2.findAllPossibleCombinationsForParts(parts, sheetss);
       expect(resultss.length).toBe(5);
 
       angular.forEach(resultss, function(results) {

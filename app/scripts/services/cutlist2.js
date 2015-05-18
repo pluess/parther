@@ -42,9 +42,16 @@ angular.module('partherApp')
         parts.push(new that.Part(inPart.width, inPart.height, inPart.name));
       });
 
-      var sheetss = this.findAllPossibleCombinations(parts, [
-        [new this.Sheet(0, 0, inSheet.x, inSheet.y)]
-      ]);
+      var partss = permutations(parts);
+      var sheetss = [];
+      angular.forEach(partss, function(p) {
+        var sss = that.findAllPossibleCombinationsForParts(p, [
+          [new that.Sheet(0, 0, inSheet.x, inSheet.y)]
+        ]);
+        angular.forEach(sss, function(ss) {
+          sheetss.push(ss);
+        });
+      });
 
       var bestSheets = null;
       var bestRating = -1;
@@ -63,7 +70,7 @@ angular.module('partherApp')
       return areaOfBiggestSheet(sheets);
     };
 
-    this.findAllPossibleCombinations = function (parts, sheetss) {
+    this.findAllPossibleCombinationsForParts = function (parts, sheetss) {
       for (var i = 0; i < parts.length; i++) {
         var nextSheetss = [];
         for (var j = 0; j < sheetss.length; j++) {
@@ -150,6 +157,36 @@ angular.module('partherApp')
         }
       });
       return biggestArea;
+    }
+
+    function permutations(list) {
+      // Empty list has one permutation
+      if (list.length === 0) {
+        return [
+          []
+        ];
+      }
+
+      var result = [];
+
+      for (var i = 0; i < list.length; i++) {
+        // Clone list (kind of)
+        var copy = Object.create(list);
+
+        // Cut one element from list
+        var head = copy.splice(i, 1);
+
+        // Permute rest of list
+        var rest = permutations(copy);
+
+        // Add head to each permutation of rest of list
+        for (var j = 0; j < rest.length; j++) {
+          var next = head.concat(rest[j]);
+          result.push(next);
+        }
+      }
+
+      return result;
     }
 
   }]);
