@@ -224,17 +224,29 @@ describe('Service: cutlist2', function () {
 
   });
 
+  describe('findAllPossibleCombinations', function() {
+    it('with 3 5x5 parts', function() {
+      var sheetss = [[new cutlist2.Sheet(0, 0, 100, 100)]];
+      var parts = [
+        new cutlist2.Part(5, 5, 'A'),
+        new cutlist2.Part(5, 5, 'B'),
+        new cutlist2.Part(5, 5, 'C')
+      ];
+      cutlist2.findAllPossibleCombinations(parts, sheetss);
+    });
+  });
+
   xdescribe('evaluateCutlis', function () {
     it('places parts correctly', function () {
       var parts = [
-        {width: 10, height: 20},
-        {width: 30, height: 40},
-        {width: 50, height: 60}
+        {width: 5, height: 5},
+        {width: 5, height: 5},
+        {width: 5, height: 5}
       ];
 
       var sheet = {
-        x: 2500,
-        y: 1200
+        x: 100,
+        y: 100
       };
 
       var sheets = cutlist2.evaluateCutlist(parts, sheet);

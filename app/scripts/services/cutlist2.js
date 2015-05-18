@@ -83,14 +83,14 @@ angular.module('partherApp')
 
     this.findAllMatchingSheetIndexes = function (sheets, part) {
       var indexes = [];
-      var i = 0;
+      var i = -1;
       do {
         i = this.findMatchingSheetIndex(sheets, part, i+1);
-        if (i>0) {
+        if (i>-1) {
           indexes.push(i);
         }
         $log.debug(i);
-      } while (i>0);
+      } while (i>-1);
       return indexes;
     };
 
