@@ -10,9 +10,9 @@
 angular.module('partherApp')
   .controller('CutlistCtrl', ['$scope', '$log', 'cutlistView', 'cutlist2', function ($scope, $log, cutlistView, cutlist2) {
     $scope.parts = [
-      {width: 10, height: 20},
-      {width: 30, height: 40},
-      {width: 50, height: 60}
+      {width: 10, height: 20, name: 'Part A'},
+      {width: 30, height: 40, name: 'Part B'},
+      {width: 50, height: 60, name: 'Part C'}
     ];
 
     $scope.sheet = {
@@ -20,17 +20,15 @@ angular.module('partherApp')
       y: 300
     };
 
-    $log.debug('init (debug)');
-    $log.info('init (info) ');
-
-    $scope.addPart = function (w, h) {
+    $scope.addPart = function (w, h, n) {
       if (!h || !w) {
         window.alert('Please enter length and width');
         return;
       }
-      $scope.parts.push({width: w, height: h});
+      $scope.parts.push({width: w, height: h, name: n});
       $scope.width = '';
       $scope.height = '';
+      $scope.name = '';
       $scope.updateCutlist();
     };
 
@@ -48,6 +46,8 @@ angular.module('partherApp')
       cutlistView.updateSheet($scope.sheet);
       $scope.updateCutlist();
     };
+
+    $log.debug('init (debug)');
 
     $scope.updateSheet();
     $scope.updateCutlist();
