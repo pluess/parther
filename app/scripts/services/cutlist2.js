@@ -42,13 +42,15 @@ angular.module('partherApp')
         parts.push(new that.Part(inPart.width, inPart.height, inPart.name));
       });
 
-      var sheetss = this.findAllPossibleCombinations(parts, [[new this.Sheet(0, 0, inSheet.x, inSheet.y)]]);
+      var sheetss = this.findAllPossibleCombinations(parts, [
+        [new this.Sheet(0, 0, inSheet.x, inSheet.y)]
+      ]);
 
       var bestSheets = null;
-      var bestRating = -1.0;
-      angular.forEach(sheetss, function(sheets) {
-        var newRating = this.rateCombination(sheets);
-        if (newRating>bestRating) {
+      var bestRating = -1;
+      angular.forEach(sheetss, function (sheets) {
+        var newRating = that.rateCombination(sheets);
+        if (newRating > bestRating) {
           bestRating = newRating;
           bestSheets = sheets;
         }
@@ -57,40 +59,37 @@ angular.module('partherApp')
       return bestSheets;
     };
 
-    this.rateCombination = function(sheets) {
-      if (sheets) {
-        return 1.0;
-      }
-      return 1.0;
+    this.rateCombination = function (sheets) {
+      return areaOfBiggestSheet(sheets);
     };
 
-    this.findAllPossibleCombinations = function(parts, sheetss) {
+    this.findAllPossibleCombinations = function (parts, sheetss) {
       for (var i = 0; i < parts.length; i++) {
         var nextSheetss = [];
-        for (var j=0; j < sheetss.length; j++) {
+        for (var j = 0; j < sheetss.length; j++) {
           var indexes = this.findAllMatchingSheetIndexes(sheetss[j], parts[i]);
-          if (indexes.length===0) {
+          if (indexes.length === 0) {
             window.alert('no matching sheets found.');
           }
-          for (var k=0; k<indexes.length; k++) {
+          for (var k = 0; k < indexes.length; k++) {
             nextSheetss.push(this.placePart(sheetss[j], parts[i], indexes[k]));
           }
         }
         sheetss = nextSheetss;
       }
-
+      return sheetss;
     };
 
     this.findAllMatchingSheetIndexes = function (sheets, part) {
       var indexes = [];
       var i = -1;
       do {
-        i = this.findMatchingSheetIndex(sheets, part, i+1);
-        if (i>-1) {
+        i = this.findMatchingSheetIndex(sheets, part, i + 1);
+        if (i > -1) {
           indexes.push(i);
         }
         $log.debug(i);
-      } while (i>-1);
+      } while (i > -1);
       return indexes;
     };
 
@@ -141,5 +140,16 @@ angular.module('partherApp')
       return newSheets;
 
     };
+
+    function areaOfBiggestSheet(sheets) {
+      var biggestArea = 0;
+      angular.forEach(sheets, function (s) {
+        var area = s.area();
+        if (area > biggestArea) {
+          biggestArea = area;
+        }
+      });
+      return biggestArea;
+    }
 
   }]);

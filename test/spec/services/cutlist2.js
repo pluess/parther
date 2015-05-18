@@ -16,6 +16,17 @@ describe('Service: cutlist2', function () {
     cutlist2 = _cutlist2_;
   }));
 
+
+  var findPartinSheets = function (sheets, part) {
+    var foundSheet = null;
+    angular.forEach(sheets, function (s) {
+      if (!foundSheet && s.usedBy === part) {
+        foundSheet = s;
+      }
+    });
+    return foundSheet;
+  };
+
   describe('Sheet', function () {
     it('calculates area', function () {
       var s = new cutlist2.Sheet(0, 0, 50, 50);
@@ -118,16 +129,6 @@ describe('Service: cutlist2', function () {
       return area;
     };
 
-    var findPartinSheets = function (sheets, part) {
-      var foundSheet = null;
-      angular.forEach(sheets, function (s) {
-        if (!foundSheet && s.usedBy === part) {
-          foundSheet = s;
-        }
-      });
-      return foundSheet;
-    };
-
     it('in identical sheet', function () {
       var sheets = [
         new cutlist2.Sheet(0, 0, 50, 100)
@@ -225,6 +226,33 @@ describe('Service: cutlist2', function () {
   });
 
   describe('findAllPossibleCombinations', function() {
+    it('with 1 5x5 parts', function() {
+      var sheetss = [[new cutlist2.Sheet(0, 0, 100, 100)]];
+      var parts = [
+        new cutlist2.Part(5, 5, 'A')
+      ];
+      var resultss = cutlist2.findAllPossibleCombinations(parts, sheetss);
+      expect(resultss.length).toBe(1);
+      expect(resultss[0].length).toBe(3);
+
+      expect(findPartinSheets(resultss[0], parts[0])).not.toBeNull();
+    });
+
+    it('with 2 5x5 parts', function() {
+      var sheetss = [[new cutlist2.Sheet(0, 0, 100, 100)]];
+      var parts = [
+        new cutlist2.Part(5, 5, 'A'),
+        new cutlist2.Part(5, 5, 'B')
+      ];
+      var resultss = cutlist2.findAllPossibleCombinations(parts, sheetss);
+      expect(resultss.length).toBe(2);
+
+      angular.forEach(resultss, function(results) {
+        expect(findPartinSheets(results, parts[0])).not.toBeNull();
+        expect(findPartinSheets(results, parts[1])).not.toBeNull();
+      });
+    });
+
     it('with 3 5x5 parts', function() {
       var sheetss = [[new cutlist2.Sheet(0, 0, 100, 100)]];
       var parts = [
@@ -232,11 +260,18 @@ describe('Service: cutlist2', function () {
         new cutlist2.Part(5, 5, 'B'),
         new cutlist2.Part(5, 5, 'C')
       ];
-      cutlist2.findAllPossibleCombinations(parts, sheetss);
+      var resultss = cutlist2.findAllPossibleCombinations(parts, sheetss);
+      expect(resultss.length).toBe(5);
+
+      angular.forEach(resultss, function(results) {
+        expect(findPartinSheets(results, parts[0])).not.toBeNull();
+        expect(findPartinSheets(results, parts[1])).not.toBeNull();
+        expect(findPartinSheets(results, parts[2])).not.toBeNull();
+      });
     });
   });
 
-  xdescribe('evaluateCutlis', function () {
+  describe('evaluateCutlis', function () {
     it('places parts correctly', function () {
       var parts = [
         {width: 5, height: 5},
@@ -250,16 +285,8 @@ describe('Service: cutlist2', function () {
       };
 
       var sheets = cutlist2.evaluateCutlist(parts, sheet);
-      var counter = 0;
-      angular.forEach(parts, function (p) {
-        angular.forEach(sheets, function (s) {
-          if (p.width === s.x && p.height === s.y && s.usedBy !== null) {
-            counter++;
-          }
-        });
-      });
-      expect(counter).toBe(parts.length);
 
+      expect(sheets.length).toBe(5);
     });
   });
 
