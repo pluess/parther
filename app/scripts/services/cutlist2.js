@@ -35,6 +35,48 @@ angular.module('partherApp')
       return this.x * this.y;
     };
 
+<<<<<<< HEAD
+=======
+    this.Rating = function(sheets) {
+      this.sheets = sheets;
+      this.areaOfBiggestSheet = 0;
+      this.nofEmptySheets = 0;
+    };
+
+    this.Rating.prototype.getArea = function() {
+      if (this.areaOfBiggestSheet===0) {
+        this.areaOfBiggestSheet = areaOfBiggestSheet(this.sheets);
+      }
+      return this.areaOfBiggestSheet;
+    };
+
+    this.Rating.prototype.getNofEmptySheets = function() {
+      if (this.nofEmptySheets===0) {
+        this.nofEmptySheets = nofEmptySheets(this.sheets);
+      }
+      return this.nofEmptySheets;
+    };
+
+    /**
+     * @param otherRating Rating
+     * @return 0< if this is lower, 0 if they are equal, 0> if this is higher than the given rating.
+     */
+    this.Rating.prototype.compareTo = function (otherRating) {
+      if (otherRating===null) {
+        return 1;
+      }
+      if (this.getArea()<otherRating.getArea()) {
+        return -1;
+      }
+      else if (this.getArea()===otherRating.getArea()) {
+        return this.getNofEmptySheets()-otherRating.getNofEmptySheets();
+      }
+      else {
+        return 1;
+      }
+    };
+
+>>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
     this.evaluateCutlist = function (inParts, inSheet/*, kerf*/) {
       var parts = [];
       var that = this;
@@ -53,6 +95,7 @@ angular.module('partherApp')
         });
       });
 
+<<<<<<< HEAD
       var bestSheets = null;
       var bestRating = -1;
       angular.forEach(sheetss, function (sheets) {
@@ -64,6 +107,19 @@ angular.module('partherApp')
       });
 
       return bestSheets;
+=======
+      var bestRating = null;
+      angular.forEach(sheetss, function (sheets) {
+
+        var newRating = new that.Rating(sheets);
+
+        if (newRating.compareTo(bestRating)>0) {
+          bestRating = newRating;
+        }
+      });
+
+      return bestRating.sheets;
+>>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
     };
 
     this.rateCombination = function (sheets) {
@@ -151,14 +207,35 @@ angular.module('partherApp')
     function areaOfBiggestSheet(sheets) {
       var biggestArea = 0;
       angular.forEach(sheets, function (s) {
+<<<<<<< HEAD
         var area = s.area();
         if (area > biggestArea) {
           biggestArea = area;
+=======
+        if (s.usedBy===null) {
+          var area = s.area();
+          if (area > biggestArea) {
+            biggestArea = area;
+          }
+>>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
         }
       });
       return biggestArea;
     }
 
+<<<<<<< HEAD
+=======
+    function nofEmptySheets(sheets) {
+      var nof = 0;
+      angular.forEach(sheets, function (s) {
+        if (s.usedBy===null) {
+          nof++;
+        }
+      });
+      return nof;
+    }
+
+>>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
     function permutations(list) {
       // Empty list has one permutation
       if (list.length === 0) {

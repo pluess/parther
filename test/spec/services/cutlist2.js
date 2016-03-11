@@ -16,7 +16,10 @@ describe('Service: cutlist2', function () {
     cutlist2 = _cutlist2_;
   }));
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
   var findPartinSheets = function (sheets, part) {
     var foundSheet = null;
     angular.forEach(sheets, function (s) {
@@ -41,6 +44,87 @@ describe('Service: cutlist2', function () {
     });
   });
 
+<<<<<<< HEAD
+=======
+  describe('Rating', function() {
+    it('considers null Ratings as lower than this', function() {
+      var sheets1 = [
+        new cutlist2.Sheet(0, 0, 10, 10),
+        new cutlist2.Sheet(0, 0, 50, 100),
+        new cutlist2.Sheet(0, 0, 200, 50),
+        new cutlist2.Sheet(0, 0, 1000, 1000)
+      ];
+      var rating1 = new cutlist2.Rating(sheets1);
+
+      expect(rating1.compareTo(null)).toBeGreaterThan(0);
+    });
+
+    it('getArea finds difference', function() {
+      var sheets1 = [
+        new cutlist2.Sheet(0, 0, 10, 10),
+        new cutlist2.Sheet(0, 0, 50, 100),
+        new cutlist2.Sheet(0, 0, 200, 50),
+        new cutlist2.Sheet(0, 0, 1000, 1000)
+      ];
+      sheets1[3].usedBy = 'used'; // dummy
+      var rating1 = new cutlist2.Rating(sheets1);
+      var sheets2 = [
+        new cutlist2.Sheet(0, 0, 10, 10),
+        new cutlist2.Sheet(0, 0, 50, 100),
+        new cutlist2.Sheet(0, 0, 200, 50),
+        new cutlist2.Sheet(0, 0, 1000, 1000)
+      ];
+      sheets2[2].usedBy = 'used'; // dummy
+      var rating2 = new cutlist2.Rating(sheets2);
+
+      expect(rating1.compareTo(rating2)).toBeLessThan(0);
+    });
+
+    it('getNofEmptySheets finds difference', function() {
+      var sheets1 = [
+        new cutlist2.Sheet(0, 0, 10, 10),
+        new cutlist2.Sheet(0, 0, 50, 100),
+        new cutlist2.Sheet(0, 0, 200, 50),
+        new cutlist2.Sheet(0, 0, 1000, 1000)
+      ];
+      sheets1[0].usedBy = 'used'; // dummy
+      sheets1[1].usedBy = 'used'; // dummy
+      var rating1 = new cutlist2.Rating(sheets1);
+      var sheets2 = [
+        new cutlist2.Sheet(0, 0, 10, 10),
+        new cutlist2.Sheet(0, 0, 50, 100),
+        new cutlist2.Sheet(0, 0, 200, 50),
+        new cutlist2.Sheet(0, 0, 1000, 1000)
+      ];
+      sheets2[0].usedBy = 'used'; // dummy
+      var rating2 = new cutlist2.Rating(sheets2);
+
+      expect(rating1.compareTo(rating2)).toBeLessThan(0);
+    });
+
+    it('getNofEmptySheets finds equal ratings', function() {
+      var sheets1 = [
+        new cutlist2.Sheet(0, 0, 10, 10),
+        new cutlist2.Sheet(0, 0, 50, 100),
+        new cutlist2.Sheet(0, 0, 200, 50),
+        new cutlist2.Sheet(0, 0, 1000, 1000)
+      ];
+      sheets1[0].usedBy = 'used'; // dummy
+      var rating1 = new cutlist2.Rating(sheets1);
+      var sheets2 = [
+        new cutlist2.Sheet(0, 0, 10, 10),
+        new cutlist2.Sheet(0, 0, 50, 100),
+        new cutlist2.Sheet(0, 0, 200, 50),
+        new cutlist2.Sheet(0, 0, 1000, 1000)
+      ];
+      sheets2[0].usedBy = 'used'; // dummy
+      var rating2 = new cutlist2.Rating(sheets2);
+
+      expect(rating1.compareTo(rating2)).toBe(0);
+    });
+  });
+
+>>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
   describe('find matching sheet', function () {
 
     it('with unused sheets', function () {
