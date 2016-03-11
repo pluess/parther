@@ -16,10 +16,6 @@ describe('Service: cutlist2', function () {
     cutlist2 = _cutlist2_;
   }));
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
   var findPartinSheets = function (sheets, part) {
     var foundSheet = null;
     angular.forEach(sheets, function (s) {
@@ -44,8 +40,6 @@ describe('Service: cutlist2', function () {
     });
   });
 
-<<<<<<< HEAD
-=======
   describe('Rating', function() {
     it('considers null Ratings as lower than this', function() {
       var sheets1 = [
@@ -124,7 +118,6 @@ describe('Service: cutlist2', function () {
     });
   });
 
->>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
   describe('find matching sheet', function () {
 
     it('with unused sheets', function () {

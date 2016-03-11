@@ -35,8 +35,6 @@ angular.module('partherApp')
       return this.x * this.y;
     };
 
-<<<<<<< HEAD
-=======
     this.Rating = function(sheets) {
       this.sheets = sheets;
       this.areaOfBiggestSheet = 0;
@@ -76,7 +74,6 @@ angular.module('partherApp')
       }
     };
 
->>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
     this.evaluateCutlist = function (inParts, inSheet/*, kerf*/) {
       var parts = [];
       var that = this;
@@ -95,19 +92,6 @@ angular.module('partherApp')
         });
       });
 
-<<<<<<< HEAD
-      var bestSheets = null;
-      var bestRating = -1;
-      angular.forEach(sheetss, function (sheets) {
-        var newRating = that.rateCombination(sheets);
-        if (newRating > bestRating) {
-          bestRating = newRating;
-          bestSheets = sheets;
-        }
-      });
-
-      return bestSheets;
-=======
       var bestRating = null;
       angular.forEach(sheetss, function (sheets) {
 
@@ -119,7 +103,6 @@ angular.module('partherApp')
       });
 
       return bestRating.sheets;
->>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
     };
 
     this.rateCombination = function (sheets) {
@@ -132,7 +115,7 @@ angular.module('partherApp')
         for (var j = 0; j < sheetss.length; j++) {
           var indexes = this.findAllMatchingSheetIndexes(sheetss[j], parts[i]);
           if (indexes.length === 0) {
-            window.alert('no matching sheets found.');
+            $log.debug('no matching sheets found.');
           }
           for (var k = 0; k < indexes.length; k++) {
             nextSheetss.push(this.placePart(sheetss[j], parts[i], indexes[k]));
@@ -207,24 +190,16 @@ angular.module('partherApp')
     function areaOfBiggestSheet(sheets) {
       var biggestArea = 0;
       angular.forEach(sheets, function (s) {
-<<<<<<< HEAD
-        var area = s.area();
-        if (area > biggestArea) {
-          biggestArea = area;
-=======
         if (s.usedBy===null) {
           var area = s.area();
           if (area > biggestArea) {
             biggestArea = area;
           }
->>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
         }
       });
       return biggestArea;
     }
 
-<<<<<<< HEAD
-=======
     function nofEmptySheets(sheets) {
       var nof = 0;
       angular.forEach(sheets, function (s) {
@@ -235,7 +210,6 @@ angular.module('partherApp')
       return nof;
     }
 
->>>>>>> 2ee4d2b99af0d07e61938b91da60d3f832c9c9de
     function permutations(list) {
       // Empty list has one permutation
       if (list.length === 0) {
