@@ -31,12 +31,10 @@ angular.module('partherApp')
       $scope.width = '';
       $scope.height = '';
       $scope.name = '';
-      $scope.updateCutlist();
     };
 
     $scope.removePart = function (i) {
       $scope.parts.splice(i, 1);
-      $scope.updateCutlist();
     };
 
     $scope.updateCutlist = function () {

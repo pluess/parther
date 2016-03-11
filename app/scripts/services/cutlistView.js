@@ -16,7 +16,7 @@ angular.module('partherApp')
     this.updateSheet = function(sheet) {
       pixiArea.empty();
       // create an new instance of a pixi stage
-      stage = new PIXI.Stage(0x66FF99);
+      stage = new PIXI.Container();
 
       // create a renderer instance.
       renderer = PIXI.autoDetectRenderer(sheet.x+1, sheet.y+1);
