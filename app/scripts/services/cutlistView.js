@@ -36,7 +36,7 @@ angular.module('partherApp')
           graphics.beginFill(0xFF9999);
         }
         graphics.lineStyle(1, 'black');
-        graphics.drawRect(item.xorigin, item.yorigin, item.x, item.y);
+        graphics.drawRect(item.xorigin+1, item.yorigin, item.x, item.y);
         var text;
         if (item.usedBy!==null) {
           text = new PIXI.Text(''+(index+1)+': '+item.usedBy.name, {font: '14px Arial', fill: 'green'});
