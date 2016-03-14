@@ -32,24 +32,23 @@ angular.module('partherApp')
       $scope.height = '';
       $scope.name = '';
 
-      cutlistView.updateParts($scope.parts);
+      cutlistView.drawParts($scope.parts);
+      cutlistView.drawSheet($scope.sheet);
     };
 
     $scope.removePart = function (i) {
       $scope.parts.splice(i, 1);
-    };
 
-    $scope.updateCutlist = function () {
-      $scope.cutlist = cutlist.evaluateCutlist($scope.parts, $scope.sheet);
-      cutlistView.updateParts($scope.cutlist);
+      cutlistView.drawParts($scope.parts);
+      cutlistView.drawSheet($scope.sheet);
     };
 
     $scope.updateSheet = function() {
-      cutlistView.updateSheet($scope.sheet);
-      $scope.updateCutlist();
+      cutlistView.drawSheet($scope.sheet);
     };
 
     cutlistView.setUp();
-    cutlistView.updateParts($scope.parts);
+    cutlistView.drawParts($scope.parts);
+    cutlistView.drawSheet($scope.sheet);
   }]);
 
