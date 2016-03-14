@@ -8,7 +8,7 @@
  * Controller of the partherApp
  */
 angular.module('partherApp')
-  .controller('CutlistCtrl', ['$scope', '$log', 'cutlistView', 'cutlist2', function ($scope, $log, cutlistView, cutlist2) {
+  .controller('CutlistCtrl', ['$scope', '$log', 'cutlistView', 'cutlist', function ($scope, $log, cutlistView, cutlist) {
     $scope.parts = [
       {width: 10, height: 20, name: 'Part A'},
       {width: 30, height: 40, name: 'Part B'},
@@ -38,7 +38,7 @@ angular.module('partherApp')
     };
 
     $scope.updateCutlist = function () {
-      $scope.cutlist = cutlist2.evaluateCutlist($scope.parts, $scope.sheet);
+      $scope.cutlist = cutlist.evaluateCutlist($scope.parts, $scope.sheet);
       cutlistView.updateParts($scope.cutlist);
     };
 

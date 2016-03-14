@@ -11,20 +11,20 @@ describe('Controller: CutlistCtrl', function () {
     scope,
     log,
     cutlistView,
-    cutlist2;
+    cutlist;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, _$log_) {
     cutlistView = jasmine.createSpyObj('cutlistView', ['updateParts', 'updateSheet']);
-    cutlist2 = jasmine.createSpyObj('cutlist2', ['evaluateCutlist']);
+    cutlist = jasmine.createSpyObj('cutlist', ['evaluateCutlist']);
     scope = $rootScope.$new();
     log = _$log_;
     cutlistCtrl = $controller('CutlistCtrl', {
-      $scope: scope, $log:log, cutlist2:cutlist2, cutlistView:cutlistView
+      $scope: scope, $log:log, cutlist2:cutlist, cutlistView:cutlistView
     });
   }));
 
-  it('addPart should add a part to the cutlist2', function () {
+  it('addPart should add a part to the cutlist', function () {
     var len = scope.parts.length;
     scope.addPart(100, 200);
 
@@ -33,7 +33,7 @@ describe('Controller: CutlistCtrl', function () {
     expect(scope.parts[len].height).toBe(200);
   });
 
-  it('removePart should remove a part from the cutlist2', function () {
+  it('removePart should remove a part from the cutlist', function () {
     var len = scope.parts.length;
     scope.removePart(2);
 
