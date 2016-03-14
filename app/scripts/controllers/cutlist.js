@@ -23,14 +23,16 @@ angular.module('partherApp')
     $scope.cutlist = [];
 
     $scope.addPart = function (w, h, n) {
-      if (!h || !w) {
-        window.alert('Please enter length and width');
+      if (!h || h<0 || w<0 || !w || !n ) {
+        window.alert('Please enter valid name, length and width');
         return;
       }
       $scope.parts.push({width: w, height: h, name: n});
       $scope.width = '';
       $scope.height = '';
       $scope.name = '';
+
+      cutlistView.updateParts($scope.parts);
     };
 
     $scope.removePart = function (i) {
@@ -47,10 +49,7 @@ angular.module('partherApp')
       $scope.updateCutlist();
     };
 
-    $log.debug('init (debug)');
-
-    $scope.updateSheet();
-    $scope.updateCutlist();
-
+    cutlistView.setUp();
+    cutlistView.updateParts($scope.parts);
   }]);
 
