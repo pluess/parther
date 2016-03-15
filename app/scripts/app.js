@@ -28,8 +28,7 @@ angular
         controller: 'AboutCtrl'
       })
       .when('/cutlist', {
-        templateUrl: 'views/cutlist.html',
-        controller: 'CutlistCtrl'
+        templateUrl: 'views/cutlist.html'
       })
       .otherwise({
         redirectTo: '/'

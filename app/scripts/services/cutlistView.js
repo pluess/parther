@@ -8,31 +8,53 @@
  * Service in the partherApp.
  */
 angular.module('partherApp')
-  .service('cutlistView', function () {
+  .service('cutlistView', ['$log', function ($log) {
 
-    var renderer;
-    var stage;
-    var partsContainer;
-    var sheetsContainer;
-    var pixiArea = $('#pixi-area');
-    var partMaxWidth = 0;
+      /** @type {Phaser.Game} */
+      var game;
 
-    this.setUp = function() {
-      pixiArea.empty();
-      // create an new instance of a pixi stage
-      stage = new PIXI.Container();
-      partsContainer = new PIXI.Container();
-      sheetsContainer = new PIXI.Container();
+      /** @type {Phaser.Group} */
+      var partsGroup;
 
-      stage.addChild(partsContainer);
-      stage.addChild(sheetsContainer);
+      /** @type {Phaser.Group} */
+      var sheetsGroup;
 
-      // create a renderer instance.
-      renderer = PIXI.autoDetectRenderer(500, 500, {backgroundColor : 0xFFFFFF});
-      pixiArea.append(renderer.view);
-      renderer.render(stage);
-    };
+      /** @type Phaser.Graphics */
+      var partsGraphics;
 
+      var parts;
+
+      function create() {
+          game.stage.backgroundColor = 0xffffff;
+
+          partsGroup = game.add.group();
+
+          partsGraphics = game.add.graphics(0, 0 ,partsGroup );
+      }
+
+      function update() {
+          partsGraphics.clear();
+          partsGraphics.lineStyle(1, 0x000000);
+          partsGraphics.beginFill(0xd3b176);
+
+          var offset = 0;
+          angular.forEach(parts, function (p) {
+              partsGraphics.drawRect(0, offset, p.width, p.height);
+              offset += p.height + 10;
+          });
+
+          partsGraphics.endFill();
+      }
+
+      this.setUp = function () {
+          game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-area', {create: create, update: update});
+      };
+
+      this.setParts = function (inParts) {
+          parts = inParts;
+      };
+
+/*
     this.drawParts = function (parts) {
       partsContainer.removeChildren();
       var title = new PIXI.Text('Parts', {font: '16px Arial'});
@@ -60,8 +82,9 @@ angular.module('partherApp')
 
       renderer.render(partsContainer);
     };
+*/
 
-    this.drawSheet = function(sheet) {
+/*    this.drawSheet = function(sheet) {
       sheetsContainer.removeChildren();
       var rectangleSheet = new PIXI.Graphics();
       rectangleSheet.beginFill(0xf7e6c8); // very light brown
@@ -71,9 +94,9 @@ angular.module('partherApp')
       sheetsContainer.x = partMaxWidth + 10;
 
       renderer.render(stage);
-    };
+    };*/
 
-    this.updatePartsInSheet = function (cutlist) {
+/*    this.updatePartsInSheet = function (cutlist) {
       if (stage) {
         stage.removeChildren();
       }
@@ -100,5 +123,6 @@ angular.module('partherApp')
         stage.addChild(graphics);
         renderer.render(stage);
       });
-    };
-  });
+    };*/
+
+  }]);

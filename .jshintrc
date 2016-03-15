@@ -20,6 +20,7 @@
   "globals": {
     "angular": false,
     "PIXI": false,
+    "Phaser": false,
     "$": false
   }
 }
