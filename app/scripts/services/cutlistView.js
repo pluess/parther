@@ -86,15 +86,18 @@ angular.module('partherApp')
                 currentPartSprite.destroy();
             }
             /** @type {Phaser.Graphics} */
-            var graphics = game.add.graphics(templatePartGraphic.world.x + 5, templatePartGraphic.world.y + 5);
+            var graphics = game.add.graphics(sheetGraphics.world.x, sheetGraphics.world.y);
             graphics.lineStyle(1, 0x000000);
             graphics.beginFill(0xd3b176); // light brown
             graphics.drawRect(0, 0, templatePartGraphic.part.width, templatePartGraphic.part.height);
             graphics.endFill();
 
+            /** @type Phaser.Rectangle */
+            var dragArea = new Phaser.Rectangle(sheetGraphics.world.x, sheetGraphics.world.y, sheet.x, sheet.y);
+
             currentPartSprite = game.add.sprite(graphics.world.x, graphics.world.y, graphics.generateTexture());
             currentPartSprite.inputEnabled = true;
-            currentPartSprite.input.enableDrag();
+            currentPartSprite.input.enableDrag(false,false,false,255,dragArea);
             currentPartSprite.part = templatePartGraphic.part;
 
             graphics.destroy();
