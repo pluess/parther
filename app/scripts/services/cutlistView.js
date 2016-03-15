@@ -16,44 +16,80 @@ angular.module('partherApp')
       /** @type {Phaser.Group} */
       var partsGroup;
 
+      /** @type Phaser.Graphics */
+      var partsGraphics;
+
       /** @type {Phaser.Group} */
       var sheetsGroup;
 
       /** @type Phaser.Graphics */
-      var partsGraphics;
+      var sheetGraphics;
 
       var parts;
+
+      var sheet;
 
       function create() {
           game.stage.backgroundColor = 0xffffff;
 
           partsGroup = game.add.group();
+          partsGraphics = game.add.graphics(0, 0, partsGroup );
 
-          partsGraphics = game.add.graphics(0, 0 ,partsGroup );
+          sheetsGroup = game.add.group();
+          sheetGraphics = game.add.graphics(0, 0, sheetsGroup );
+
+          drawParts();
+          drawSheet();
       }
 
-      function update() {
-          partsGraphics.clear();
-          partsGraphics.lineStyle(1, 0x000000);
-          partsGraphics.beginFill(0xd3b176);
+      function drawParts() {
+          if (partsGraphics && parts) {
+              partsGraphics.clear();
+              partsGraphics.lineStyle(1, 0x000000);
+              partsGraphics.beginFill(0xd3b176);
 
-          var offset = 0;
-          angular.forEach(parts, function (p) {
-              partsGraphics.drawRect(0, offset, p.width, p.height);
-              offset += p.height + 10;
-          });
+              var offset = 0;
+              angular.forEach(parts, function (p) {
+                  partsGraphics.drawRect(0, offset, p.width, p.height);
+                  offset += p.height + 10;
+              });
 
-          partsGraphics.endFill();
+              partsGraphics.endFill();
+          }
+          alignGroups();
       }
+
+      function drawSheet() {
+          if (sheetGraphics && sheet) {
+              sheetGraphics.clear();
+              sheetGraphics.lineStyle(1, 0x000000);
+              sheetGraphics.beginFill(0xd3b176);
+              sheetGraphics.drawRect(0, 0, sheet.x, sheet.y);
+              sheetGraphics.endFill();
+          }
+          alignGroups();
+      }
+
+      function alignGroups() {
+          if (partsGroup && sheetsGroup) {
+              sheetsGroup.x = partsGroup.width + 10;
+          }
+      }
+
 
       this.setUp = function () {
-          game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-area', {create: create, update: update});
+          game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-area', {create: create});
       };
 
       this.setParts = function (inParts) {
           parts = inParts;
+          drawParts();
       };
 
+      this.setSheet = function(inSheet) {
+          sheet = inSheet;
+          drawSheet();
+      };
 /*
     this.drawParts = function (parts) {
       partsContainer.removeChildren();

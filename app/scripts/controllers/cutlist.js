@@ -42,11 +42,11 @@ angular.module('partherApp')
         };
 
         $scope.updateSheet = function () {
-            cutlistView.drawSheet($scope.sheet);
+            cutlistView.setSheet($scope.sheet);
         };
 
         cutlistView.setUp();
         cutlistView.setParts($scope.parts);
-        /*cutlistView.drawSheet($scope.sheet);*/
+        cutlistView.setSheet($scope.sheet);
     }]);
 
